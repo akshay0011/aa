@@ -1,0 +1,44 @@
+<div class="md-form">
+<input #long placeholder="longitude" />
+<br>
+<input #lat placeholder="lat" />
+<br>
+<button (click)="addContact(long.value,lat.value)">Search location</button><br>
+</div>
+<mgl-map
+  [style]="'mapbox://styles/mapbox/streets-v9'"
+  [zoom]="[8]"
+  [center]="[long.value,lat.value]"
+>
+<mgl-layer
+id="state-borders"
+type="line"
+[source]="states"
+[paint]="{
+  'line-color': '#627BC1',
+  'line-width': 10
+}"
+></mgl-layer>
+  <mgl-popup
+     [lngLat]="[long.value,lat.value]"
+     [closeOnClick]="false"
+   >
+     <h1>location</h1>
+   </mgl-popup>
+   <mgl-marker
+  [lngLat]="[long.value,lat.value]"
+>
+  <div
+     (click)="alert('Foo')"
+    class="marker"
+  >
+  your location 
+  </div>
+</mgl-marker>
+
+  
+  
+   
+</mgl-map>
+
+<router-outlet></router-outlet>
